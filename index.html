@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="newsStyle.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Weather App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About this App</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">User Guide</a>
+          </li>
+
+        </ul>
+        <form class="d-flex" role="search" onsubmit="handleCitySearch(event)">
+          <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="my-4 text-center">Weather for <span id="cityName"></span></h1>
+    <main>
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 text-bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Temperature</h4>
+            </div>
+            <div class="card-body" style="max-height: 200px; height: 200px;">
+              <h1 class="card-title pricing-card-title"><span id="temp2"></span>
+                <small class="text-body-secondary fw-light"><span> &#8451;</span></small>
+              </h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Temprature is <span id="temp"></span></li>
+                <li>Min Temprature is <span id="min_temp"></span></li>
+                <li>Max Temprature is <span id="max_temp"></span></li>
+
+              </ul>
+
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 text-bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Humidity Info </h4>
+            </div>
+            <div class="card-body" style="max-height: 200px; height: 200px;">
+              <h1 class="card-title pricing-card-title"><span id="humidity2"></span>
+                <small class="text-body-secondary fw-light"> %</small>
+              </h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Cloud PCT is <span id="cloud_pct"></span></li>
+                <li>Feels like <span id="feels_like"></span></li>
+                <li>Humidity is <span id="humidity"></span></li>
+
+              </ul>
+
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 text-bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Wind Info</h4>
+            </div>
+            <div class="card-body" style="max-height: 200px; height: 200px;">
+              <h1 class="card-title pricing-card-title"><span id="wind_speed2"></span>
+                <small class="text-body-secondary fw-light"> km/hr</small>
+              </h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Wind Speed is <span id="wind_speed"></span></li>
+                <li>Sunrise Time is <span id="sunrise"></span></li>
+                <li>Sunset Time is <span id="sunset"></span></li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+        <div class="main">
+          <h1 style="padding-bottom: 20px; font-size: 3em;
+          font-family: initial;">Todays News Update</h1>
+          <form class="d-flex" role="search" onsubmit="handleNewsInput(event)">
+            <input id="country" class="form-control me-2" type="search" placeholder="Country- IN" aria-label="Country Code">
+            <input id="language" class="form-control me-2" type="search" placeholder="Language - en" aria-label="Language">
+            <input id="category" class="form-control me-2" type="search" placeholder="Category - Sports" aria-label="Category">
+            <button style="color: black;" class="btn btn-outline-success newsBtn" type="submit" id="submit">Search</button>
+          </form>
+          <ul class="cards" id="NewsDiv">
+          </ul>
+        </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+  <script  src="newsScript.js"></script>
+</body>
+</html>
